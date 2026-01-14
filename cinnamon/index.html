@@ -9,11 +9,10 @@
         :root { --primary: #8B4513; --accent: #D2B48C; }
         #card-container { width: 100%; max-width: 400px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; position: relative; }
         .header { background: var(--primary); color: white; padding: 30px; text-align: center; }
-        .logo { font-size: 22px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
         .logo-img { max-width: 180px; max-height: 100px; display: block; margin: 0 auto 10px auto; border-radius: 4px; }
+        .logo { font-size: 22px; font-weight: bold; color: white; text-transform: uppercase; }
         .content { padding: 30px 20px; text-align: center; }
         input { width: 80%; padding: 15px; margin: 20px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 18px; text-align: center; }
-        input:focus { border-color: var(--primary); outline: none; }
         button { width: 90%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
         .row { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 12px 0; text-align: left; }
         .label { font-size: 12px; font-weight: bold; color: #888; text-transform: uppercase; }
@@ -54,7 +53,7 @@
                 <span class="val" id="d_date"></span>
             </div>
             <br>
-            <img id="d_img" class="farmer-img" src="" onerror="this.src='https://placehold.co/400x400/eee/31343C?text=No+Photo'; this.style.border='none';">
+            <img id="d_img" class="farmer-img" src="" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x400/eee/31343C?text=No+Photo';">
             <div style="font-weight:bold; font-size:18px;" id="d_farm"></div>
             <div style="color:#777; font-size:13px;">Master Farmer</div>
             <br>
@@ -65,7 +64,7 @@
     </div>
 </div>
 <script>
-    const BATCH_DB = [{"id": "CM-101", "farmer": "Nimal", "date": "1/10/2026", "photo": "https://wsrv.nl/?url=https://drive.google.com/uc?export=view&id=1BnPsi2glggDDmcte5ZtVjQ91WkW9WuvC&w=400&h=400&fit=cover", "map": "https://maps.app.goo.gl/6XsD6DdGYsnX1ZP88", "report": "https://drive.google.com/file/d/14vYVJUxvETSaY65pb6BCP5xNEhPKII-p/view?usp=drive_link"}, {"id": "Cm-102", "farmer": "Amal", "date": "2/13/2026", "photo": "https://wsrv.nl/?url=https://drive.google.com/uc?export=view&id=1YXudrNJF7lYXORRcBysOmSgEmgYwmFPv&w=400&h=400&fit=cover", "map": "https://maps.app.goo.gl/6XsD6DdGYsnX1ZP88", "report": "https://drive.google.com/file/d/1Ls5gYTpCTT58NHYu4GH_V6krPAFfO6hB/view?usp=drive_link"}, {"id": "CM-103", "farmer": "Samal", "date": "10/10/2025", "photo": "https://wsrv.nl/?url=https://drive.google.com/uc?export=view&id=1YK5xg6MV7175uO3ZvRMMJAP3rKQtjHAZ&w=400&h=400&fit=cover", "map": "5uh5y5", "report": "https://drive.google.com/open?id=1ScLPvjra5IptXVz2zoi6Kw-toHLvJayH"}, {"id": "CM-104", "farmer": "Ramiru", "date": "12/12/2025", "photo": "https://wsrv.nl/?url=https://drive.google.com/uc?export=view&id=17E9Zo0R3WOQMNmOD_X0uZt3D_fIzRqkR&w=400&h=400&fit=cover", "map": "cece", "report": "https://drive.google.com/open?id=1gUms2yPp0ZWk_C1V1GOA81Sbkb-jv9_X"}];
+    const BATCH_DB = [{"id": "CM-101", "farmer": "Nimal", "date": "1/10/2026", "photo": "https://drive.google.com/uc?export=view&id=1BnPsi2glggDDmcte5ZtVjQ91WkW9WuvC", "map": "https://maps.app.goo.gl/6XsD6DdGYsnX1ZP88", "report": "https://drive.google.com/file/d/14vYVJUxvETSaY65pb6BCP5xNEhPKII-p/view?usp=drive_link"}, {"id": "Cm-102", "farmer": "Amal", "date": "2/13/2026", "photo": "https://drive.google.com/uc?export=view&id=1YXudrNJF7lYXORRcBysOmSgEmgYwmFPv", "map": "https://maps.app.goo.gl/6XsD6DdGYsnX1ZP88", "report": "https://drive.google.com/file/d/1Ls5gYTpCTT58NHYu4GH_V6krPAFfO6hB/view?usp=drive_link"}, {"id": "CM-103", "farmer": "Samal", "date": "10/10/2025", "photo": "https://drive.google.com/uc?export=view&id=1YK5xg6MV7175uO3ZvRMMJAP3rKQtjHAZ", "map": "5uh5y5", "report": "https://drive.google.com/open?id=1ScLPvjra5IptXVz2zoi6Kw-toHLvJayH"}, {"id": "CM-104", "farmer": "Ramiru", "date": "12/12/2025", "photo": "https://drive.google.com/uc?export=view&id=17E9Zo0R3WOQMNmOD_X0uZt3D_fIzRqkR", "map": "cece", "report": "https://drive.google.com/open?id=1gUms2yPp0ZWk_C1V1GOA81Sbkb-jv9_X"}];
     function search() {
         const inputField = document.getElementById('bid');
         const errorMsg = document.getElementById('err');
