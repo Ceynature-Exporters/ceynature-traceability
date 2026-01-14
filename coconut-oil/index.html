@@ -9,11 +9,10 @@
         :root { --primary: #4E342E; --accent: #81C784; }
         #card-container { width: 100%; max-width: 400px; background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); overflow: hidden; position: relative; }
         .header { background: var(--primary); color: white; padding: 30px; text-align: center; }
-        .logo { font-size: 22px; font-weight: bold; letter-spacing: 1px; text-transform: uppercase; }
         .logo-img { max-width: 180px; max-height: 100px; display: block; margin: 0 auto 10px auto; border-radius: 4px; }
+        .logo { font-size: 22px; font-weight: bold; color: white; text-transform: uppercase; }
         .content { padding: 30px 20px; text-align: center; }
         input { width: 80%; padding: 15px; margin: 20px 0; border: 2px solid #ddd; border-radius: 8px; font-size: 18px; text-align: center; }
-        input:focus { border-color: var(--primary); outline: none; }
         button { width: 90%; padding: 15px; background: var(--primary); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: bold; cursor: pointer; }
         .row { display: flex; justify-content: space-between; border-bottom: 1px solid #eee; padding: 12px 0; text-align: left; }
         .label { font-size: 12px; font-weight: bold; color: #888; text-transform: uppercase; }
@@ -54,7 +53,7 @@
                 <span class="val" id="d_date"></span>
             </div>
             <br>
-            <img id="d_img" class="farmer-img" src="" onerror="this.src='https://placehold.co/400x400/eee/31343C?text=No+Photo'; this.style.border='none';">
+            <img id="d_img" class="farmer-img" src="" referrerpolicy="no-referrer" onerror="this.src='https://placehold.co/400x400/eee/31343C?text=No+Photo';">
             <div style="font-weight:bold; font-size:18px;" id="d_farm"></div>
             <div style="color:#777; font-size:13px;">Master Farmer</div>
             <br>
@@ -65,7 +64,7 @@
     </div>
 </div>
 <script>
-    const BATCH_DB = [{"id": "CO-101", "farmer": "Ajith", "date": "11/23/2026", "photo": "https://wsrv.nl/?url=https://drive.google.com/uc?export=view&id=1S-gibHNWgzmddHUlzkKB5YpTxjIgw4WP&w=400&h=400&fit=cover", "map": "vvdcxsx", "report": "https://drive.google.com/open?id=1uH7fBW-zwuWw2TO1sP_IedR4w-oGxFFy"}];
+    const BATCH_DB = [{"id": "CO-101", "farmer": "Ajith", "date": "11/23/2026", "photo": "https://drive.google.com/uc?export=view&id=1S-gibHNWgzmddHUlzkKB5YpTxjIgw4WP", "map": "vvdcxsx", "report": "https://drive.google.com/open?id=1uH7fBW-zwuWw2TO1sP_IedR4w-oGxFFy"}];
     function search() {
         const inputField = document.getElementById('bid');
         const errorMsg = document.getElementById('err');
