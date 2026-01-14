@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        // --- MASTER SWITCH ---
+        // CURRENTLY: Points to your temporary GitHub pages
+        // NEXT MONTH: Change this to "https://www.ceynature.com/trace"
+        const TARGET_BASE = "https://ceynature-exporters.github.io/ceynature-traceability/Builder";
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const p = urlParams.get('p'); // Product (e.g., Cinnamon)
+
+        if (p) {
+            // Sends user to: TARGET_BASE + /Build_Cinnamon/index.html
+            window.location.href = `${TARGET_BASE}/Build_${p}/index.html`;
+        } else {
+            window.location.href = "https://ceynature-exporters.github.io/ceynature-traceability/";
+        }
+    </script>
+</head>
+<body>Routing you to Ceynature Traceability...</body>
+</html>
