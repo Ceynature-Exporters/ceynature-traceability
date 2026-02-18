@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ceylon Desiccated Coconut | Ceynature Traceability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root { --primary: #006064; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: #f0f2f5; margin: 0; display: flex; justify-content: center; }
+        #app-container { width: 100%; max-width: 450px; background: white; min-height: 100vh; position: relative; overflow-x: hidden; }
+        .top-nav { background: white; padding: 25px; text-align: center; border-bottom: 1px solid #eee; }
+        .logo-img { max-height: 80px; margin-bottom: 10px; }
+        input { width: 100%; padding: 18px; border-radius: 20px; border: 2px solid #eee; text-align: center; font-size: 16px; margin-top: 15px; outline: none; transition: border-color 0.3s; }
+        input:focus { border-color: var(--primary); }
+        .search-btn { width: 100%; padding: 18px; margin-top: 10px; background: var(--primary); color: white; border: none; border-radius: 20px; font-weight: 700; cursor: pointer; font-size: 16px; transition: transform 0.2s; }
+        .hero-container { border-radius: 25px; overflow: hidden; margin-top: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .hero-img { width: 100%; height: 220px; object-fit: cover; display: block; }
+        #result-screen { display: none; padding: 20px; }
+        .farmer-card { background: white; border-radius: 30px; padding: 25px; text-align: center; border: 1px solid #eee; }
+        .farmer-img { width: 180px; height: 180px; border-radius: 50%; object-fit: cover; border: 6px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .data-grid { background: #f8f9fa; border-radius: 20px; padding: 15px; margin-top: 10px; }
+        .data-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid #eee; font-size: 14px; }
+        .error-msg { background: #ffebee; color: #c62828; padding: 15px; border-radius: 15px; display: none; margin-top: 10px; text-align: center; font-weight: 600; }
+        .hidden { display: none !important; }
+    </style>
+</head>
+<body>
+<div id="app-container">
+    <div class="top-nav">
+        <img src="ceynature logo.jpg" class="logo-img">
+        <div class="search-box">
+            <input type="text" id="bid" placeholder="Enter Batch ID">
+            <button class="search-btn" onclick="search()">TRACE ORIGIN</button>
+            <div class="error-msg" id="err">Batch ID not found. Please try again.</div>
+        </div>
+    </div>
+    <div class="scroll-content" style="padding: 20px;">
+        <div id="intro-area">
+            <div class="hero-container"><img src="desiccated coconut photo.png" class="hero-img"></div>
+            <h2 style="font-weight: 800; margin-top: 25px; color: #333;">Why Ceylon Desiccated Coconut?</h2>
+            <ul><li>🥥 Finely shredded and dried to perfection for a rich, snowy texture</li><li>✨ Naturally gluten-free and high in dietary fiber for healthy digestion</li><li>🧁 Ideal for premium confectionery, baking, and culinary masterpieces</li><li>🇱🇰 100% Sri Lankan origin with no added preservatives or sweeteners.</li></ul>
+        </div>
+        <div id="result-screen">
+            <div class="farmer-card">
+                <h2 id="d_farm" class="farmer-name"></h2>
+                <img id="d_img" class="farmer-img" src="" onerror="this.src='https://placehold.co/400x400?text=No+Photo'">
+                <div class="data-grid">
+                    <div class="data-row"><span>Batch ID</span><span id="d_id" style="font-weight:800; color:var(--primary)"></span></div>
+                    <div class="data-row"><span>Harvest Date</span><span id="d_date" style="font-weight:600"></span></div>
+                </div>
+            </div>
+            <a id="lnk_map" class="search-btn" style="display:block; text-align:center; text-decoration:none; margin-top:20px;" target="_blank">📍 View Farm Location</a>
+            <a id="lnk_rep" class="search-btn" style="display:block; text-align:center; text-decoration:none; margin-top:10px; background:#333;" target="_blank">📄 View Lab Report</a>
+            <p style="text-align:center; margin-top:30px; color:var(--primary); font-weight:700; cursor:pointer;" onclick="location.reload()">← START NEW SEARCH</p>
+        </div>
+    </div>
+</div>
+<script>
+    /* SAFETY SHIELD: Python replaces the comment AND the empty brackets. */
+    const BATCH_DB = [{"id": "DC-101", "farmer": "Senuka", "date": "2/11/2026", "photo": "https://lh3.googleusercontent.com/u/0/d/1zFvMBYtv8jXm71JcHJGjRmqlLUlXf5xp", "map": "Gaiavwiwi", "report": "https://drive.google.com/open?id=1r8qVh8Am0EyBdKN-jheZbrhXw8SAsGkt"}, {"id": "DC-102", "farmer": "Test", "date": "2/18/2026", "photo": "https://lh3.googleusercontent.com/u/0/d/13F2FB3fJmXN2ktyL4zxvlhmKzb9lk2B_", "map": "Test", "report": "https://drive.google.com/open?id=1YtkjH8_90_fMr2zAF6muhdmXQKg2tMSH"}];
+
+    function search() {
+        const val = document.getElementById('bid').value.trim().toLowerCase();
+        const err = document.getElementById('err');
+        const found = BATCH_DB.find(b => b.id.toString().toLowerCase() === val);
+        if(found) {
+            err.style.display = 'none';
+            document.getElementById('intro-area').classList.add('hidden');
+            document.getElementById('result-screen').style.display = 'block';
+            document.getElementById('d_id').innerText = found.id;
+            document.getElementById('d_farm').innerText = found.farmer;
+            document.getElementById('d_date').innerText = found.date;
+            document.getElementById('d_img').src = found.photo;
+            const m = document.getElementById('lnk_map');
+            if(found.map) { m.href = found.map; m.style.display = 'block'; } else m.style.display = 'none';
+            const r = document.getElementById('lnk_rep');
+            if(found.report) { r.href = found.report; r.style.display = 'block'; } else r.style.display = 'none';
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        } else { err.style.display = 'block'; }
+    }
+</script>
+</body>
+</html>
